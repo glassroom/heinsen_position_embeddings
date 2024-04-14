@@ -22,18 +22,18 @@ from heinsen_position_embeddings import EmbedPosition
 embed_pos = EmbedPosition(d_emb=1024, d_hid=1024)
 
 x = torch.randn(1000, 1024)  # 1000 tokens, each with 1024 elements
-x = embed_pos(x)             # with position info embedded in them
+x = embed_pos(x)             # tokens with position info embedded in them
 ```
-In practice, we have found it useful to apply LayerNorm afterwards, for numerical stability.
+In practice, for numerical stability, we have found it useful to apply LayerNorm (or some other kind of normalization) before computing any subsequent transformations of token states in a model.
 
-For adding position information to sequences split in chunks, specify `using_prev_context=True` in each forward pass after the first one:
+You can embed position information in sequences of tokens that are split in chunks. To do so, specify `using_prev_context=True` in each forward pass after the first one:
 
 ```python
-chunk1 = torch.randn(1000, 1024)
-chunk1 = embed_pos(chunk1)
+chunk1 = torch.randn(1000, 1024)                     # first chunk of tokens
+chunk1 = embed_pos(chunk1)                           # caches ending state
 
-chunk2 = torch.rand(1000, 1024)  # continues sequence started in chunk1
-chunk2 = embed_pos(chunk2, using_prev_context=True)
+chunk2 = torch.rand(1000, 1024)                      # continues first chunk
+chunk2 = embed_pos(chunk2, using_prev_context=True)  # starts from cached state
 ```
 
 As always, you should test and compare to other aproaches for encoding position information, to determine which method works best for your application.
