@@ -33,7 +33,7 @@ chunk1 = torch.randn(1000, 1024)
 chunk1 = embed_pos(chunk1)
 
 chunk2 = torch.rand(1000, 1024)  # continues sequence started in chunk1
-chunk2 = embed_pos(chunk1, using_prev_context=True)
+chunk2 = embed_pos(chunk2, using_prev_context=True)
 ```
 
 As always, you should test and compare to other aproaches for encoding position information, to determine which method works best for your application.
