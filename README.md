@@ -3,15 +3,6 @@
 Reference implementation of "[Encoding Position by Decaying and Updating Different Exponentiated States Differently](assets/preprint.pdf)" (Heinsen, 2024) (arXiv link pending).
 
 
-* [Installing](#installing)
-
-* [Using](#using)
-
-* [Notes](#notes)
-
-* [Citing](#citing)
-
-
 ## Installing
 
 ```
@@ -25,7 +16,7 @@ The only dependency is PyTorch.
 
 ## Using
 
-```
+```python
 from heinsen_position_embeddings import EmbedPosition
 
 embed_pos = EmbedPosition(d_emb=1024, d_hid=1024)
@@ -33,8 +24,19 @@ embed_pos = EmbedPosition(d_emb=1024, d_hid=1024)
 x = torch.randn(1000, 1024)  # 1000 tokens, each with 1024 elements
 x = embed_pos(x)             # with position info embedded in them
 ```
+In practice, we have found it useful to apply LayerNorm afterwards, for numerical stability.
 
-In practice, we have found it useful to apply LayerNorm afterwards, for numerical stability. As always, you should compare to other aproaches for encoding position information to determine which method works best for your particular use case.
+For processing sequence of chunks sequentially, specify `using_prev_context=True` for the forward pass:
+
+```python
+chunk1 = torch.randn(1000, 1024)
+chunk1 = embed_pos(chunk1)
+
+chunk2 = torch.rand(1000, 1024)  # continues sequence started in chunk1
+chunk2 = embed_pos(chunk1, using_prev_context=True)
+```
+
+As always, you should test and compare to other aproaches for encoding position information, to determine which method works best for your application.
 
 
 ## Notes
