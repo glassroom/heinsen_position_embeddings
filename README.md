@@ -26,7 +26,7 @@ x = embed_pos(x)             # with position info embedded in them
 ```
 In practice, we have found it useful to apply LayerNorm afterwards, for numerical stability.
 
-For processing sequence of chunks sequentially, specify `using_prev_context=True` for the forward pass:
+For adding position information to sequences split in chunks, specify `using_prev_context=True` in each forward pass after the first one:
 
 ```python
 chunk1 = torch.randn(1000, 1024)
