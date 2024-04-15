@@ -2,7 +2,7 @@
 from setuptools import setup
 
 setup(name='heinsen_position_embeddings',
-    version='1.0.0',
+    version='1.0.1',
     description='Implementation of "Encoding Position by Decaying and Updating Different Exponentiated States Differently" (Heinsen, 2024).',
     url='https://github.com/glassroom/heinsen_position_embeddings',
     author='Franz A. Heinsen',
