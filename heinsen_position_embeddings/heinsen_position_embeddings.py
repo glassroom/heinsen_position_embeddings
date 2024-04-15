@@ -38,7 +38,7 @@ class EmbedPosition(nn.Module):
         return log_linear_recurrence[..., 1:, :]                                    # [..., n_tok, d_hid]
 
     def forward(self, x, using_prev_context=False):
-        tup = self.H(x).split(self.d_emb, dim=-1)                    # [..., n_tok, d_hid] x 2
+        tup = self.H(x).split(self.d_hid, dim=-1)                    # [..., n_tok, d_hid] x 2
         log_p, h = (F.logsigmoid(tup[0]), tup[1])                    # [..., n_tok, d_hid] x 2
 
         if using_prev_context:
