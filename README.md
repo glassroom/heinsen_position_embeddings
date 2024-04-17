@@ -58,7 +58,7 @@ All code is in a single file, [heinsen_position_embeddings.py](heinsen_position_
 
 In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods (_i.e._, neither significantly better nor significantly worse), but offers many benefits that make it a worthwhile candidate for application, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length.
 
-As always, _we recommend testing and comparing against other alternatives to determine which one will work best for your specific application_. For an overview of many other proposed methods, see [Position Information in Transformers: An Overview](https://direct.mit.edu/coli/article/48/3/733/111478/Position-Information-in-Transformers-An-Overview).
+As always, _we recommend testing and comparing against other alternatives to determine which one will work best for your specific application_. For an overview of many other proposed methods, see [here](https://direct.mit.edu/coli/article/48/3/733/111478/Position-Information-in-Transformers-An-Overview).
 
 
 ## Notes
