@@ -56,7 +56,7 @@ All code is in a single file, [heinsen_position_embeddings.py](heinsen_position_
 
 ## Compared to Other Methods
 
-In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods for encoding position information, but offers many benefits that make it a worthwhile choice, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. As always, we recommend testing and comparing against other alternatives to determine which one will work best for your specific application.
+In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods (_i.e._, neither significantly better nor significantly worse), but offers many benefits that make it a worthwhile candidate for application, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. As always, we recommend testing and comparing against other alternatives to determine which one will work best for your specific application.
 
 
 ## Notes
