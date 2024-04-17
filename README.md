@@ -31,7 +31,9 @@ In practice, for numerical stability, we have found it useful to apply LayerNorm
 
 ### Recurrent Application
 
-Our method for encoding position information is recurrent, so you can embed position information in sequences of tokens that are split in chunks, with no preset limit on sequence length. To encode position information in each new chunk in a stream of chunks, specify `using_prev_context=True` in each forward pass after the first forward pass:
+Our method for encoding position information is recurrent, so you can embed position information in sequences of tokens that are split in chunks, with no preset limit on sequence length.
+
+To encode position information in each new chunk from a stream of chunks, specify `using_prev_context=True` in each forward pass after the first one:
 
 ```python
 chunk1 = torch.randn(1000, 1024)                     # first chunk of tokens
@@ -52,7 +54,7 @@ All code is in a [single file](heinsen_position_embeddings/heinsen_position_embe
 
 ## Compared to Other Methods
 
-In our limited testing, we have found that our method for encoding position information performs comparably to other methods for encoding position information, but offers many benefits that make it a worthwhile choice, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. As always, we recommend testing and comparing against other alternatives to determine which one will work best for your specific application.
+In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods for encoding position information, but offers many benefits that make it a worthwhile choice, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. As always, we recommend testing and comparing against other alternatives to determine which one will work best for your specific application.
 
 
 ## Notes
