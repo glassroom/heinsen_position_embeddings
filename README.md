@@ -51,7 +51,7 @@ chunk3 = embed_pos(chunk3, using_prev_context=True)  # starts from cached state
 
 ## Customizing
 
-All code is in a single file, [heinsen_position_embeddings.py](heinsen_position_embeddings/heinsen_position_embeddings.py), for easy customization. The module incorporates two feed-forward components, `H` and `R`, defined by default as `nn.Linear` layers with biases, that you can replace with other feed-forward transformations. Component `H` corresponds to function $\mathcal{H}$ in our preprint, but without the Sigmoid function, as we already apply it subsequently in the domain of logarithms with `F.logsigmoid`. Component `R` corresponds to function $\mathcal{R}$ in our preprint.
+All code is in a single file, [heinsen_position_embeddings.py](./heinsen_position_embeddings/heinsen_position_embeddings.py), for easy customization. The module incorporates two feed-forward components, `H` and `R`, defined by default as `nn.Linear` layers with biases, that you can replace with other feed-forward transformations. Component `H` corresponds to function $\mathcal{H}$ in our preprint, but without the Sigmoid function, as we already apply it subsequently in the domain of logarithms with `F.logsigmoid`. Component `R` corresponds to function $\mathcal{R}$ in our preprint.
 
 
 ## Compared to Other Methods
