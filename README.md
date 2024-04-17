@@ -51,12 +51,14 @@ chunk3 = embed_pos(chunk3, using_prev_context=True)  # starts from cached state
 
 ## Customizing
 
-All code is in a single file, [heinsen_position_embeddings.py](heinsen_position_embeddings/heinsen_position_embeddings.py), for easy customization. The module incorporates two feed-forward components, `H` and `R`, defined by default as `nn.Linear` layers with biases, that you can replace with other feed-forward transformations. (`H` corresponds to function $\mathcal{H}$ in the paper, but without the Sigmoid function, and `R` corresponds to function $\mathcal{R}$).
+All code is in a single file, [heinsen_position_embeddings.py](heinsen_position_embeddings/heinsen_position_embeddings.py), for easy customization. The module incorporates two feed-forward components, `H` and `R`, defined by default as `nn.Linear` layers with biases, that you can replace with other feed-forward transformations. Component `H` corresponds to function $\mathcal{H}$ in the preprint, but without the Sigmoid function. Component `R` corresponds to function $\mathcal{R}$ in our preprint.
 
 
 ## Compared to Other Methods
 
-In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods (_i.e._, neither significantly better nor significantly worse), but offers many benefits that make it a worthwhile candidate for application, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. As always, we recommend testing and comparing against other alternatives to determine which one will work best for your specific application.
+In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods (_i.e._, neither significantly better nor significantly worse), but offers many benefits that make it a worthwhile candidate for application, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length.
+
+As always, _we recommend testing and comparing against other alternatives to determine which one will work best for your specific application_.
 
 
 ## Notes
