@@ -21,11 +21,13 @@ Our implementation is a PyTorch `nn.Module`, easily added as a component to any 
 ```python
 from heinsen_position_embeddings import EmbedPosition
 
-embed_pos = EmbedPosition(d_emb=1024, d_hid=1024)
+batch_sz, n_tok, d_emb, d_hid = (8, 1000, 1024, 1024)  # setup for toy exampe
+embed_pos = EmbedPosition(d_emb, d_hid)                # instatiate module
 
-x = torch.randn(1000, 1024)  # 1000 tokens, each with 1024 elements
-x = embed_pos(x)             # tokens with position info embedded in them
+x = torch.randn(batch_sz, n_tok, d_emb)  # token states without position info
+x = embed_pos(x)                         # token states with position info
 ```
+
 In practice, for numerical stability, we have found it useful to apply LayerNorm (or some other kind of normalization) before computing any subsequent transformations of token states in a model.
 
 
@@ -36,13 +38,13 @@ Our method for encoding position information is recurrent, so you can embed posi
 To encode position information in each new chunk from a stream of chunks, specify `using_prev_context=True` in each forward pass after the first one:
 
 ```python
-chunk1 = torch.randn(1000, 1024)                     # first chunk of tokens
+chunk1 = torch.randn(batch_sz, n_tok, d_emb)         # first chunk of tokens
 chunk1 = embed_pos(chunk1)                           # module caches its ending state
 
-chunk2 = torch.rand(1000, 1024)                      # continues first chunk
+chunk2 = torch.rand(batch_sz, n_tok, d_emb)          # continues first chunk
 chunk2 = embed_pos(chunk2, using_prev_context=True)  # starts from cached state
 
-chunk3 = torch.rand(1000, 1024)                      # continues second chunk
+chunk3 = torch.rand(batch_sz, n_tok, d_emb)          # continues second chunk
 chunk3 = embed_pos(chunk3, using_prev_context=True)  # starts from cached state
 ```
 
