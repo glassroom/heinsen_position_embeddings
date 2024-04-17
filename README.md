@@ -16,6 +16,8 @@ The only dependency is PyTorch.
 
 ## Using
 
+Our implementation is a PyTorch `nn.Module`, easily added as a component to any model:
+
 ```python
 from heinsen_position_embeddings import EmbedPosition
 
@@ -26,17 +28,31 @@ x = embed_pos(x)             # tokens with position info embedded in them
 ```
 In practice, for numerical stability, we have found it useful to apply LayerNorm (or some other kind of normalization) before computing any subsequent transformations of token states in a model.
 
-You can embed position information in sequences of tokens that are split in chunks. To do so, specify `using_prev_context=True` in each forward pass after the first one:
+
+### Recurrent Application
+
+Our method for encoding position information is recurrent, so you can embed position information in sequences of tokens that are split in chunks, with no preset limit on sequence length. To encode position information in each new chunk in a stream of chunks, specify `using_prev_context=True` in each forward pass after the first forward pass:
 
 ```python
 chunk1 = torch.randn(1000, 1024)                     # first chunk of tokens
-chunk1 = embed_pos(chunk1)                           # caches ending state
+chunk1 = embed_pos(chunk1)                           # module caches its ending state
 
 chunk2 = torch.rand(1000, 1024)                      # continues first chunk
 chunk2 = embed_pos(chunk2, using_prev_context=True)  # starts from cached state
+
+chunk3 = torch.rand(1000, 1024)                      # continues second chunk
+chunk3 = embed_pos(chunk3, using_prev_context=True)  # starts from cached state
 ```
 
-As always, you should test and compare to other aproaches for encoding position information, to determine which method works best for your application.
+
+## Customizing
+
+All code is in a [single file](heinsen_position_embeddings/heinsen_position_embeddings.py) for easy customization. The module incorporates two feed-forward components, `H` and `R`, defined by default as `nn.Linear` layers with biases, that you can customize. (`H` corresponds to function $\mathcal{H}$ in the paper, but without the Sigmoid function, and `R` corresponds to function $\mathcal{R}$).
+
+
+## Compared to Other Methods
+
+In our limited testing, we have found that our method for encoding position information performs comparably to other methods for encoding position information, but offers many benefits that make it a worthwhile choice, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. As always, we recommend testing and comparing against other alternatives to determine which one will work best for your specific application.
 
 
 ## Notes
