@@ -61,6 +61,18 @@ In limited comparison experiments, we have found that our method for encoding po
 As always, _we recommend testing and comparing against other alternatives to determine which one will work best for your specific application_. For an overview of many other proposed methods, see [here](https://direct.mit.edu/coli/article/48/3/733/111478/Position-Information-in-Transformers-An-Overview).
 
 
+## Frequently Asked Questions
+
+_Q: Isn't this a type of recurrent neural network (RNN)?_
+
+Yes. We formulate our method as a recurrent transformation, so it is an RNN -- albeit a really simple one. We like to think of it as a "minimally viable RNN." Like all RNNs, this one enables past tokens to "send information" to the current token via a hidden state.
+
+
+_Q: Couldn't I use this RNN for sequence modeling on its own, say, by stacking multiple layers of it in a deep model?_
+
+Yes. Keep in mind that like other RNNs, this one lacks the ability to query past tokens as a function of the current token's state. To the best of our knowledge, at present only attention mechanisms can query past tokens as a function of current token state.
+
+
 ## Notes
 
 We have tested the code in this repository only on Ubuntu Linux 22.04 with Python 3.10+.
