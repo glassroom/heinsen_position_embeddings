@@ -22,7 +22,7 @@ Our implementation is a PyTorch `nn.Module`, easily added as a component to any 
 from heinsen_position_embeddings import EmbedPosition
 
 batch_sz, n_tok, d_emb, d_hid = (8, 1000, 1024, 1024)  # setup for toy exampe
-embed_pos = EmbedPosition(d_emb, d_hid)                # instatiate module
+embed_pos = EmbedPosition(d_emb, d_hid)                # instantiate module
 
 x = torch.randn(batch_sz, n_tok, d_emb)  # token states without position info
 x = embed_pos(x)                         # token states with position info
