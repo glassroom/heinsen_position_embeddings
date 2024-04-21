@@ -73,6 +73,11 @@ _Q: Couldn't I use this RNN for sequence modeling on its own, say, by stacking m
 Yes. Keep in mind that like other RNNs, this one lacks the ability to query past tokens as a function of the current token's state. To the best of our knowledge, at present only attention mechanisms can query past tokens as a function of current token state.
 
 
+_Q: Why does the module detach the ending state before caching it?_
+
+We assume you will train the module in parallel over whole sequences, as is conventional. If for some reason you want to train the module one token at a time, you can change our code so it doesn't automatically detach state, and handle detaching on your own. Keep in mind that training one token at a time may be significantly slower.
+
+
 ## Notes
 
 We have tested the code in this repository only on Ubuntu Linux 22.04 with Python 3.10+.
