@@ -56,7 +56,7 @@ All code is in a single file, at `heinsen_position_embeddings/heinsen_position_e
 
 ## Compared to Other Methods
 
-In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods (_i.e._, neither significantly better nor significantly worse). However, our method offers many benefits that make it a worthwhile candidate for application, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length.
+In limited comparison experiments, we have found that our method for encoding position information performs similarly to other methods (_i.e._, neither significantly better nor significantly worse). However, our method offers many benefits that make it a worthwhile candidate for application, including large representational capacity, low compute cost, and small memory footprint -- in addition to unbounded sequence length. In our limited experiments, we have always kept `d_hid` equal to `d_emb`. We have not yet tested our method with `d_hid` different from `d_emb`.
 
 As always, _we recommend testing and comparing against other alternatives to determine which one will work best for your specific application_. For an overview of many other proposed methods, see [here](https://direct.mit.edu/coli/article/48/3/733/111478/Position-Information-in-Transformers-An-Overview).
 
@@ -76,6 +76,11 @@ Yes. Keep in mind that like other RNNs, this one lacks the ability to query past
 _Q: Why does the module detach the ending state before caching it?_
 
 We assume you will train the module in parallel over whole sequences, as is conventional. If for some reason you want to train the module one token at a time, you can change our code so it doesn't automatically detach state, and handle detaching on your own. Keep in mind that training one token at a time may be significantly slower.
+
+
+_Q: Can I use these position embeddings in multiple blocks of my Transformer model?_
+
+Yes. We have not tested it, but we would expect it to work well.
 
 
 ## Notes
