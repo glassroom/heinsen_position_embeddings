@@ -1,12 +1,10 @@
 # heinsen_position_embeddings
 
-Encodes position information in token sequences by decaying and updating the exponentiated states of different position-encoding features differently. At each step, we exponentiate the previous state of each position-encoding feature, decay it by a hidden probability, add to it an exponentiated hidden logit, and take the logarithm, obtaining the feature's updated state. We compute each hidden probability and logit dynamically from token state.
+Encoding position information in token sequences by decaying and updating the exponentiated states of different position-encoding features differently. At each step, we exponentiate the previous state of each position-encoding feature, decay it by a hidden probability, add to it an exponentiated hidden logit, and take the logarithm, obtaining the feature's updated state. We compute each hidden probability and logit dynamically from token state.
 
-The following figure shows how we update a single position-encoding feature's state $s_i \in \mathbb{R}$, with initial state $s_0$, given a hidden probability $p_i \in (0, 1)$ and logit $h_i \in \mathbb{R}$ at each step $i = (1, 2, \dots)$:
+The figure below shows how we update a single position-encoding feature's state $s_i \in \mathbb{R}$, with initial state $s_0$, given a hidden probability $p_i \in (0, 1)$ and logit $h_i \in \mathbb{R}$ at each step $i = (1, 2, \dots)$. For $d$ position-encoding features, $s_i \in \mathbb{R}^d$, $p_i \in (0, 1)^d$, and $h_i \in \mathbb{R}^d$. For more details, see our [research note preprint](assets/preprint.pdf).
 
 ![State of a single position-encoding feature](assets/single_position_encoding_feature.png)
-
-For $d$ position-encoding features, $s_i \in \mathbb{R}^d$, $p_i \in (0, 1)^d$, and $h_i \in \mathbb{R}^d$. For more details, see our [research note preprint](assets/preprint.pdf).
 
 
 ## Installing
