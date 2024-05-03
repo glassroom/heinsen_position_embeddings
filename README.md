@@ -1,6 +1,6 @@
 # heinsen_position_embeddings
 
-Reference implementation of "[Encoding Position by Decaying and Updating Different Exponentiated States Differently](assets/preprint.pdf)" (Heinsen, 2024) (arXiv link pending).
+Reference implementation of "[Encoding Position by Decaying and Updating Different Exponentiated States Differently](assets/preprint.pdf)" (Heinsen, 2024).
 
 
 ## Installing
@@ -90,7 +90,7 @@ We have tested the code in this repository only on Ubuntu Linux 22.04 with Pytho
 
 ## Citing
 
-Until our arXiv link goes live, please cite as follows:
+If you find our work useful, please cite it:
 
 ```
 @misc{heinsen2024position,
