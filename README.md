@@ -1,6 +1,12 @@
 # heinsen_position_embeddings
 
-Reference implementation of "[Encoding Position by Decaying and Updating Different Exponentiated States Differently](assets/preprint.pdf)" (Heinsen, 2024).
+Encodes position information in token sequences by decaying and updating the exponentiated states of different position-encoding features differently. At each step, we exponentiate the previous state of each position-encoding feature, decay it by a hidden probability, add to it an exponentiated hidden logit, and take the logarithm, obtaining the feature's updated state. We compute each hidden probability and logit dynamically from token state.
+
+The following figure shows how we update a single position-encoding feature's state $s_i \in \mathbb{R}$, with initial state $s_0$, given a hidden probability $p_i \in (0, 1)$ and logit $h_i \in \mathbb{R}$ at each step $i = (1, 2, \dots)$:
+
+![State of a single position-encoding feature](assets/fig.png)
+
+For $d$ position-encoding features, $s_i \in \mathbb{R}^d$, $p_i \in (0, 1)^d$, and $h_i \in \mathbb{R}^d$. For more details, see our [research note preprint](assets/preprint.pdf).
 
 
 ## Installing
@@ -105,3 +111,4 @@ If you find our work useful, please cite it:
 ## How is this used at GlassRoom?
 
 We conceived and implemented our attention mechanism for proprietary use. Most of the original work we do at GlassRoom tends to be tightly coupled to internal code, so we cannot share it with outsiders. In this case, however, we were able to isolate our code and release it as stand-alone open-source software without having to disclose any key intellectual property. We hope others find our work and our code useful.
+
