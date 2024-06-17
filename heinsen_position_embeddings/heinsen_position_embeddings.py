@@ -28,7 +28,7 @@ class EmbedPosition(nn.Module):
         self.R = nn.Linear(d_hid, d_emb)         # function R in paper
 
     def extra_repr(self):
-        return 'd_emb={}, d_hid={}'.format(d_emb, d_hid)
+        return 'd_emb={}, d_hid={}'.format(self.d_emb, self.d_hid)
 
     def _log_linear_recurrence(self, log_coeffs, prepended_logits):
         "Applies method proposed in https://arxiv.org/abs/2311.06281."
